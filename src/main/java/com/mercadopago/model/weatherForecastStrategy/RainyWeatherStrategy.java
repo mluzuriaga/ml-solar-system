@@ -6,10 +6,10 @@ import com.mercadopago.model.weatherForecast.WeatherForecast;
 import com.mercadopago.model.weatherForecast.WeatherForecastType;
 import com.mercadopago.utils.SolarSystemMaths;
 import com.mercadopago.utils.TriangleMath;
-import com.sun.javafx.geom.Point2D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class RainyWeatherStrategy implements WeatherForecastStrategy {
             listOfPoints.add(planet.getXYPosition());
 
         // Posicion del sol
-        Point2D sunPoint = new Point2D(0, 0);
+        Point2D sunPoint = new Point2D.Double(0, 0);
 
         // Verifica si el sol se encuentra dentro del triangulo formado por los planetas
         return SolarSystemMaths.isInside(listOfPoints, sunPoint);

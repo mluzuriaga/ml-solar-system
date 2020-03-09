@@ -5,7 +5,7 @@ import com.mercadopago.model.planetFactory.Planet;
 import com.mercadopago.model.weatherForecast.WeatherForecast;
 import com.mercadopago.model.weatherForecast.WeatherForecastType;
 import com.mercadopago.utils.SolarSystemMaths;
-import com.sun.javafx.geom.Point2D;
+import java.awt.geom.Point2D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +37,7 @@ public class DroughtWeatherStrategy implements WeatherForecastStrategy {
             listOfPoints.add(planet.getXYPosition());
 
         // Agrego la posicion del sol
-        Point2D sunPoint = new Point2D(0, 0);
+        Point2D sunPoint = new Point2D.Double(0, 0);
         listOfPoints.add(sunPoint);
 
         // Verifica si la posicion de los planetas forma una lina

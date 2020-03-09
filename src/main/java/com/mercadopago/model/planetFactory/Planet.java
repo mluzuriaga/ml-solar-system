@@ -2,7 +2,8 @@ package com.mercadopago.model.planetFactory;
 
 import com.mercadopago.model.SolarSystemStatus;
 import com.mercadopago.utils.SolarSystemMaths;
-import com.sun.javafx.geom.Point2D;
+
+import java.awt.geom.Point2D;
 
 import static java.lang.Math.abs;
 

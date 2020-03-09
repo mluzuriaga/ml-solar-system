@@ -1,7 +1,6 @@
 package com.mercadopago.utils;
 
-
-import com.sun.javafx.geom.Point2D;
+import java.awt.geom.Point2D;
 
 public class TriangleMath {
 

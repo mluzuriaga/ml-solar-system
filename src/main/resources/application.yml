@@ -3,16 +3,20 @@ solar:
     cronJob: 0/1 * * * * *
     daysPeriod: 3600
 
+server:
+  servlet:
+    context-path: /solar-system
+
 spring:
   jpa:
     hibernate:
-      ddlAuto: create-drop
+      ddl-auto: create-drop
+    generate-ddl: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL57Dialect
   datasource:
-    #    url: jdbc:mysql://localhost:3306/weather_forecast?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_1f3cf7ce41a5814?reconnect=true
-    username: b5cee3f25ca20e
-    password: 5a703955
-    driverClassName: com.mysql.cj.jdbc.Driver
+    username: b022014d68b9e8
+    password: 72ee5daf
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_41e4995bbccaac0?reconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC

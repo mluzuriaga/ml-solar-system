@@ -1,11 +1,13 @@
 package com.mercadopago.services.impl;
 
-import com.mercadopago.model.SolarSystemStatus;
+import com.mercadopago.config.SolarSystemPeriod;
+import com.mercadopago.exceptions.WeatherForecastException;
 import com.mercadopago.model.dto.WeatherForecastDTO;
 import com.mercadopago.model.weatherForecast.WeatherForecast;
+import com.mercadopago.model.weatherForecast.WeatherForecastReport;
+import com.mercadopago.repositories.WeatherForecastReportRepository;
 import com.mercadopago.repositories.WeatherForecastRepository;
 import com.mercadopago.services.WeatherForecastService;
-import com.mercadopago.utils.SolarSystemDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,40 @@ import java.time.LocalDate;
 public class WeatherForecastServiceImpl implements WeatherForecastService {
 
     @Autowired
+    private SolarSystemPeriod solarSystemPeriod;
+
+    @Autowired
     private WeatherForecastRepository weatherForecastRepository;
 
-    @Override
-    public WeatherForecastDTO getWeatherForecastDay(long days) {
+    @Autowired
+    private WeatherForecastReportRepository weatherForecastReportRepository;
 
-        LocalDate date = SolarSystemDate.initialDate.plusDays(days);
+    @Override
+    public WeatherForecastDTO getWeatherForecastDay(long days) throws WeatherForecastException {
+
+        LocalDate date = this.solarSystemPeriod.getInitialDate().plusDays(days);
+
+        if (date.isAfter(this.solarSystemPeriod.getDate()))
+            throw new WeatherForecastException("La fecha solicitada es posterior al periodo pronosticado. Para consultar sobre periodos anteriores contacte al administrador.");
+
         WeatherForecast weatherForecast = this.weatherForecastRepository.findAllByDate(date);
         return new WeatherForecastDTO(days, weatherForecast.getWeatherForecastType());
+
+    }
+
+    @Override
+    public WeatherForecastReport getWeatherForecastReport() {
+
+        return this.weatherForecastReportRepository.findTopByOrderByIdDesc();
+
+    }
+
+    @Override
+    public void runAnotherPeriod(long days) {
+
+        this.solarSystemPeriod.setInitialDate(this.solarSystemPeriod.getDate());
+        this.solarSystemPeriod.setPeriodDays(days);
+        this.solarSystemPeriod.setEnabled(true);
 
     }
 

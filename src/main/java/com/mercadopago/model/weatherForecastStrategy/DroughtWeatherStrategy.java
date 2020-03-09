@@ -1,11 +1,12 @@
 package com.mercadopago.model.weatherForecastStrategy;
 
+import com.mercadopago.config.SolarSystemPeriod;
 import com.mercadopago.model.planetFactory.Planet;
 import com.mercadopago.model.weatherForecast.WeatherForecast;
 import com.mercadopago.model.weatherForecast.WeatherForecastType;
-import com.mercadopago.utils.SolarSystemDate;
 import com.mercadopago.utils.SolarSystemMaths;
 import javafx.geometry.Point2D;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +15,8 @@ import java.util.List;
 @Component
 public class DroughtWeatherStrategy implements WeatherForecastStrategy {
 
-    private long counter;
+    @Autowired
+    private SolarSystemPeriod solarSystemPeriod;
 
     @Override
     public boolean fitsPrediction(List<Planet> planets) {
@@ -27,17 +29,14 @@ public class DroughtWeatherStrategy implements WeatherForecastStrategy {
         Point2D sunPoint = new Point2D(0, 0);
         listOfPoints.add(sunPoint);
 
-        if (SolarSystemMaths.isLine(listOfPoints)) {
-            counter++;
-            return true;
-        } else
-            return false;
+        return SolarSystemMaths.isLine(listOfPoints);
 
     }
 
     @Override
     public WeatherForecast getWeatherForecast(List<Planet> planets) {
-        return new WeatherForecast(SolarSystemDate.date, WeatherForecastType.DROUGHT);
+        this.solarSystemPeriod.addDroughtDay();
+        return new WeatherForecast(this.solarSystemPeriod.getDate(), WeatherForecastType.DROUGHT);
     }
 
 }

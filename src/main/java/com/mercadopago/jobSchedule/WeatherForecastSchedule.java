@@ -1,13 +1,13 @@
 package com.mercadopago.jobSchedule;
 
-import com.google.gson.Gson;
+import com.mercadopago.config.SolarSystemPeriod;
 import com.mercadopago.model.SolarSystem;
 import com.mercadopago.model.weatherForecast.WeatherForecast;
+import com.mercadopago.model.weatherForecast.WeatherForecastReport;
+import com.mercadopago.repositories.WeatherForecastReportRepository;
 import com.mercadopago.repositories.WeatherForecastRepository;
-import com.mercadopago.utils.SolarSystemDate;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,23 +25,22 @@ public class WeatherForecastSchedule {
     @Autowired
     private WeatherForecastRepository weatherForecastRepository;
 
-    private boolean enabled = true;
+    @Autowired
+    private WeatherForecastReportRepository weatherForecastReportRepository;
 
-    @Value("${solar.system.daysPeriod}")
-    private int daysPeriod;
-
-    private Gson gson = new Gson();
+    @Autowired
+    private SolarSystemPeriod solarSystemPeriod;
 
     //    (cron = "${solar.system.cronJob}")
     @Scheduled(fixedRate = 1)
     public void executeDay() {
 
-        if (this.enabled) {
+        if (this.solarSystemPeriod.isEnabled()) {
 
-            long daysPassed = DAYS.between(SolarSystemDate.initialDate, SolarSystemDate.date);
-            if (daysPassed < this.daysPeriod) {
+            long daysPassed = DAYS.between(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate());
+            if (daysPassed < this.solarSystemPeriod.getPeriodDays()) {
 
-                LOGGER.info("Ejecutando el Job de Pronostico del dia: " + SolarSystemDate.date);
+                LOGGER.info("Ejecutando el Job de Pronostico del dia: " + this.solarSystemPeriod.getDate());
 
                 WeatherForecast weatherForecastStrategy = this.solarSystem.runOneDayWeatherForecast();
                 this.weatherForecastRepository.save(weatherForecastStrategy);
@@ -50,6 +49,11 @@ public class WeatherForecastSchedule {
 
             } else {
 
+                WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays());
+                this.weatherForecastReportRepository.save(weatherForecastReport);
+
+                this.solarSystemPeriod.cleanCounters();
+                this.solarSystemPeriod.setEnabled(false);
 
             }
 

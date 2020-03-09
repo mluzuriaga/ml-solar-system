@@ -1,6 +1,6 @@
 package com.mercadopago.utils;
 
-import javafx.geometry.Point2D;
+import com.sun.javafx.geom.Point2D;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

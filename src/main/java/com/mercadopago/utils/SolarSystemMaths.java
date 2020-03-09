@@ -1,6 +1,6 @@
 package com.mercadopago.utils;
 
-import javafx.geometry.Point2D;
+import com.sun.javafx.geom.Point2D;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -29,7 +29,7 @@ public class SolarSystemMaths {
         double y = sin(toRadians(angle)) * radius;
         y = Double.parseDouble(df.format(y).replace(",", "."));
 
-        return new Point2D(x, y);
+        return new Point2D((float) x, (float) y);
 
     }
 
@@ -79,11 +79,11 @@ public class SolarSystemMaths {
     private static double slope(Point2D point1, Point2D point2) {
 
         // Validacion por infinito
-        if ((point1.getX() - point2.getX()) == 0)
+        if ((point1.x - point2.x) == 0)
             return 0;
 
         // Calculo de pendiente
-        return (point2.getY() - point1.getY()) / (point2.getX() - point1.getX());
+        return (point2.y - point1.y) / (point2.x - point1.x);
 
     }
 
@@ -102,8 +102,8 @@ public class SolarSystemMaths {
 
         for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
 
-            if ((points.get(i).getY() > point.getY()) != (points.get(j).getY() > point.getY()) &&
-                    (point.getX() < (points.get(j).getX() - points.get(i).getX()) * (point.getY() - points.get(i).getY()) / (points.get(j).getY() - points.get(i).getY()) + points.get(i).getX())) {
+            if ((points.get(i).y > point.y) != (points.get(j).y > point.y) &&
+                    (point.x < (points.get(j).x - points.get(i).x) * (point.y - points.get(i).y) / (points.get(j).y - points.get(i).y) + points.get(i).x)) {
                 result = !result;
             }
 

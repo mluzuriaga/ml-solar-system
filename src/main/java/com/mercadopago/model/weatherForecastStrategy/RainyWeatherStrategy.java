@@ -6,7 +6,7 @@ import com.mercadopago.model.weatherForecast.WeatherForecast;
 import com.mercadopago.model.weatherForecast.WeatherForecastType;
 import com.mercadopago.utils.SolarSystemMaths;
 import com.mercadopago.utils.TriangleMath;
-import javafx.geometry.Point2D;
+import com.sun.javafx.geom.Point2D;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

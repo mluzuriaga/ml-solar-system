@@ -2,10 +2,9 @@ package com.mercadopago;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class SolarSystemApplication extends SpringBootServletInitializer {
+public class SolarSystemApplication {
 
     public static void main(String[] args) {
 

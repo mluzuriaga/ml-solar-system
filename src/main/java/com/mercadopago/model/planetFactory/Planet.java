@@ -17,7 +17,6 @@ public abstract class Planet {
     // Distancia al sol
     private long sunDistance;
 
-
     Planet(String name, int angularVelocity, long sunDistance) {
 
         this.name = name;

@@ -16,7 +16,7 @@
     </parent>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
@@ -39,11 +39,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.dejv78.commons.jfx</groupId>
-            <artifactId>jfx-geometry</artifactId>
-            <version>1.1.0</version>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>javafx</artifactId>
+            <version>2016.10.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.testng</groupId>

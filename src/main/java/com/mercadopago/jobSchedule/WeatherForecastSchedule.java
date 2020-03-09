@@ -53,12 +53,13 @@ public class WeatherForecastSchedule {
 
             } else {
 
-                LOGGER.info("* Generando reporte del periodo: " + this.solarSystemPeriod.getInitialDate() + " - " + this.solarSystemPeriod.getDate());
-
                 // Genero el reporte del periodo
                 WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays());
                 // Persisto el reporte
                 this.weatherForecastReportRepository.save(weatherForecastReport);
+
+                // Logueo los resultado por consola
+                this.logReportResults();
 
                 // Limpio los contadores de periodos del intervalo
                 this.solarSystemPeriod.cleanCounters();
@@ -68,6 +69,21 @@ public class WeatherForecastSchedule {
             }
 
         }
+
+    }
+
+    private void logReportResults() {
+
+        LOGGER.info("------------------------------------------------------------------------------");
+
+        LOGGER.info("* Generando reporte del periodo: " + this.solarSystemPeriod.getInitialDate() + " - " + this.solarSystemPeriod.getDate());
+        LOGGER.info("  - Cantidad de dias de sequia: " + this.solarSystemPeriod.getDroughtDays());
+        LOGGER.info("  - Cantidad de dias de lluvia: " + this.solarSystemPeriod.getRainyDays());
+        LOGGER.info("  - Cantidad de dias de lluvia intensa: " + this.solarSystemPeriod.getIntenseRainyDays());
+        LOGGER.info("  - Cantidad de dias de optimos de presion y temperatura : " + this.solarSystemPeriod.getOptimalDays());
+
+        LOGGER.info("------------------------------------------------------------------------------");
+
 
     }
 

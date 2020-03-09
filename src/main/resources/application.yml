@@ -1,0 +1,17 @@
+solar:
+  system:
+    cronJob: 0/1 * * * * *
+    daysPeriod: 3600
+
+spring:
+  jpa:
+    hibernate:
+      ddlAuto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/weather_forecast?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver

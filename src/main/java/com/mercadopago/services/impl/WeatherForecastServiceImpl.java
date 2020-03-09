@@ -25,31 +25,55 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
     @Autowired
     private WeatherForecastReportRepository weatherForecastReportRepository;
 
+    /**
+     * Obtengo el pronostico del dia indicado
+     *
+     * @param days - dias desde el dia inicial del intervalo calculado
+     * @return -
+     * @throws WeatherForecastException -
+     */
     @Override
     public WeatherForecastDTO getWeatherForecastDay(long days) throws WeatherForecastException {
 
+        // Obtengo la fecha deseada sumando los dias a la fecha inicial de intervalo
         LocalDate date = this.solarSystemPeriod.getInitialDate().plusDays(days);
 
+        // Si la fecha solicitada a un no se calculo se retorna una excepcion
         if (date.isAfter(this.solarSystemPeriod.getDate()))
             throw new WeatherForecastException("La fecha solicitada es posterior al periodo pronosticado. Para consultar sobre periodos anteriores contacte al administrador.");
 
+        // Se busca por fecha usando el repositorio
         WeatherForecast weatherForecast = this.weatherForecastRepository.findAllByDate(date);
         return new WeatherForecastDTO(days, weatherForecast.getWeatherForecastType());
 
     }
 
+    /**
+     * Obtengo el reporte del ultimo intervalo calculado
+     *
+     * @return -
+     */
     @Override
     public WeatherForecastReport getWeatherForecastReport() {
 
+        // Obtengo usando el repositorio el ultimo reporte
         return this.weatherForecastReportRepository.findTopByOrderByIdDesc();
 
     }
 
+    /**
+     * Corre un nuevo intervalo de pronosticos
+     *
+     * @param days - cantidad de dias desde la ultima fecha que se quiere pronosticar
+     */
     @Override
     public void runAnotherPeriod(long days) {
 
+        // Seteo la fecha inicial
         this.solarSystemPeriod.setInitialDate(this.solarSystemPeriod.getDate());
+        // Seteo la cantidad de dias que se va a pronosticar
         this.solarSystemPeriod.setPeriodDays(days);
+        // Habilito el cron
         this.solarSystemPeriod.setEnabled(true);
 
     }

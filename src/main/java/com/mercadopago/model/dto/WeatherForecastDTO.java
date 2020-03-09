@@ -2,6 +2,9 @@ package com.mercadopago.model.dto;
 
 import com.mercadopago.model.weatherForecast.WeatherForecastType;
 
+/**
+ * DTO para retornar el clima solicitado con la estructura de JSON pedida.
+ */
 public class WeatherForecastDTO {
 
     private long dia;

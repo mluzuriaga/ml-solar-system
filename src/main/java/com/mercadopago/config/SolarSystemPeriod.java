@@ -4,18 +4,29 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+/**
+ * Mantiene las fechas de inicio y fin para el calculo de los periodos, y la cuenta de los periodos en dicho intervalo
+ */
 @Component
 public class SolarSystemPeriod {
 
+    // Indica si el Job esta activo o no
     private boolean enabled = true;
 
+    // Fecha de inicio para el calculo de los periodos
     private LocalDate initialDate;
+    // Fecha actual
     private LocalDate date;
+    // Cantidad de dias del intervalo a calcular
     private long periodDays;
 
+    // Cantidad de dias de sequia
     private long droughtDays = 0;
+    // Cantidad de dias de lluvia
     private long rainyDays = 0;
+    // Cantidad de dias de lluvia intensa
     private long intenseRainyDays = 0;
+    // Cantidad de dias optimos de presion y temperatura
     private long optimalDays = 0;
 
     public SolarSystemPeriod() {
@@ -86,10 +97,16 @@ public class SolarSystemPeriod {
         this.optimalDays++;
     }
 
+    /**
+     * Suma un dia al dia actual - Usado por el cron Job para pasar de dia
+     */
     public void nextDay() {
         date = date.plusDays(1);
     }
 
+    /**
+     * Limpia los contadores de los periodos del intervalo - Usado para poder calcular un nuevo periodo
+     */
     public void cleanCounters() {
 
         droughtDays = 0;

@@ -2,6 +2,9 @@ package com.mercadopago.model.planetFactory;
 
 import com.mercadopago.model.SolarSystemStatus;
 
+/**
+ * Unica instancia del planeta Vulcanos, no pueden existir mas de un planeta Vulcanos en este sistema solar
+ */
 class Vulcanos extends Planet {
 
     private static Vulcanos single_instance;
@@ -12,6 +15,11 @@ class Vulcanos extends Planet {
 
     }
 
+    /**
+     * Obtiene la unica instancia de Vulcanos
+     *
+     * @return -
+     */
     static Planet getInstance() {
 
         if (single_instance == null)
@@ -21,6 +29,11 @@ class Vulcanos extends Planet {
 
     }
 
+    /**
+     * Vulcanos setea su posicion al estado actual del sistema solar
+     *
+     * @param solarSystemStatus - estado actual del sistema solar
+     */
     @Override
     public void setSolarSystemStatusPosition(SolarSystemStatus solarSystemStatus) {
 

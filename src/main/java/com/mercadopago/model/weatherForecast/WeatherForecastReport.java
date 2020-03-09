@@ -7,6 +7,9 @@ import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Reporte general de un intervalo
+ */
 @Entity
 public class WeatherForecastReport {
 
@@ -14,13 +17,20 @@ public class WeatherForecastReport {
     @GeneratedValue
     private long id;
 
+    // Dia inicial del intervalo
     private LocalDate initDay;
+    // Dia final del intervalo
     private LocalDate lastDay;
+    // Cantidad de dias del intervalo a calcular
     private long period;
 
+    // Cantidad de dias de sequia
     private long droughtDays;
+    // Cantidad de dias de lluvia
     private long rainyDays;
+    // Cantidad de dias de lluvia instensa
     private long intenseRainyDays;
+    // Cantidad de dias optimos de presion y temperatura
     private long optimalDays;
 
     public WeatherForecastReport() {

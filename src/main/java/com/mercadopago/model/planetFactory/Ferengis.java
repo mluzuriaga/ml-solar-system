@@ -2,6 +2,9 @@ package com.mercadopago.model.planetFactory;
 
 import com.mercadopago.model.SolarSystemStatus;
 
+/**
+ * Unica instancia del planeta Ferengis, no pueden existir mas de un planeta Ferengis en este sistema solar
+ */
 class Ferengis extends Planet {
 
     private static Ferengis single_instance;
@@ -12,6 +15,11 @@ class Ferengis extends Planet {
 
     }
 
+    /**
+     * Obtiene la unica instancia de Ferengis
+     *
+     * @return -
+     */
     static Planet getInstance() {
 
         if (single_instance == null)
@@ -21,6 +29,11 @@ class Ferengis extends Planet {
 
     }
 
+    /**
+     * Ferengis setea su posicion al estado actual del sistema solar
+     *
+     * @param solarSystemStatus - estado actual del sistema solar
+     */
     @Override
     public void setSolarSystemStatusPosition(SolarSystemStatus solarSystemStatus) {
 

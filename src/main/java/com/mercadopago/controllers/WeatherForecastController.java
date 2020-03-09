@@ -18,6 +18,12 @@ public class WeatherForecastController {
     @Autowired
     private WeatherForecastService weatherForecastService;
 
+    /**
+     * Endpoint para obtener el pronostico de un dia en particular del ultimo intervalo pronosticado
+     *
+     * @param days - cantidad de dias desde el dia inicial del ultimo periodo calculado
+     * @return - pronostico del clima
+     */
     @GetMapping("/clima")
     public ResponseEntity getWeatherForecastDay(@RequestParam("dia") Long days) {
 
@@ -35,7 +41,12 @@ public class WeatherForecastController {
 
     }
 
-    @GetMapping("/report")
+    /**
+     * Endpoint para obtener el reporte de periodos del ultimo intervalo calculado
+     *
+     * @return - cantidad de periodos
+     */
+    @GetMapping("/reporte")
     public ResponseEntity<WeatherForecastReport> getWeatherForecastReport() {
 
         WeatherForecastReport weatherForecastReport = this.weatherForecastService.getWeatherForecastReport();
@@ -43,7 +54,12 @@ public class WeatherForecastController {
 
     }
 
-    @PostMapping("/new-period")
+    /**
+     * Endpoint para calcular nuevos periodos en un nuevo intervalo
+     *
+     * @param days - cantidad de dias del periodo que se desea calcular. La fecha inicial sera la ultima del periodo anterior.
+     */
+    @PostMapping("/nuevo")
     public void runAnotherPeriod(@RequestParam("dias") Long days) {
 
         this.weatherForecastService.runAnotherPeriod(days);

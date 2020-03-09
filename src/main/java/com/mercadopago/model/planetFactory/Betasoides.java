@@ -2,6 +2,9 @@ package com.mercadopago.model.planetFactory;
 
 import com.mercadopago.model.SolarSystemStatus;
 
+/**
+ * Unica instancia del planeta Betasoides, no pueden existir mas de un planeta Betasoide en este sistema solar
+ */
 public class Betasoides extends Planet {
 
     private static Betasoides single_instance;
@@ -12,6 +15,11 @@ public class Betasoides extends Planet {
 
     }
 
+    /**
+     * Obtiene la unica instancia de Betasoides
+     *
+     * @return -
+     */
     static Planet getInstance() {
 
         if (single_instance == null)
@@ -21,6 +29,11 @@ public class Betasoides extends Planet {
 
     }
 
+    /**
+     * Betasoides setea su posicion al estado actual del sistema solar
+     *
+     * @param solarSystemStatus - estado actual del sistema solar
+     */
     @Override
     public void setSolarSystemStatusPosition(SolarSystemStatus solarSystemStatus) {
 

@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface WeatherForecastStrategy {
 
+    // Chequea si un pronostico se ajusta segun la posicion de los planetas
     boolean fitsPrediction(List<Planet> planets);
 
+    // Obtiene el pronostico
     WeatherForecast getWeatherForecast(List<Planet> planets);
 
 }

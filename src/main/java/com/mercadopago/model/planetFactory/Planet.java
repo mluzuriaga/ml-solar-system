@@ -8,9 +8,13 @@ import static java.lang.Math.abs;
 
 public abstract class Planet {
 
+    // Nombre del planeta
     private String name;
+    // Posicion actual del planeta
     private int angularPosition;
+    // Velocidad a la que se traslada el planeta
     private int angularVelocity;
+    // Distancia al sol
     private long sunDistance;
 
     Planet(String name, int angularVelocity, long sunDistance) {
@@ -23,7 +27,7 @@ public abstract class Planet {
 
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -31,7 +35,7 @@ public abstract class Planet {
         this.name = name;
     }
 
-    public int getAngularVelocity() {
+    int getAngularVelocity() {
         return angularVelocity;
     }
 
@@ -39,7 +43,7 @@ public abstract class Planet {
         this.angularVelocity = angularVelocity;
     }
 
-    public long getSunDistance() {
+    long getSunDistance() {
         return sunDistance;
     }
 
@@ -47,7 +51,7 @@ public abstract class Planet {
         this.sunDistance = sunDistance;
     }
 
-    public int getAngularPosition() {
+    int getAngularPosition() {
         return angularPosition;
     }
 
@@ -66,10 +70,14 @@ public abstract class Planet {
 
     }
 
+    /**
+     * Traslada al planeta un dia segun su velocidad
+     */
     public void rotate() {
 
         this.angularPosition = this.angularPosition + this.angularVelocity;
 
+        // Para mantener las posiciones angulares de 0-360
         if (abs(this.angularPosition) >= 360)
 
             if (this.angularPosition > 0)
@@ -77,9 +85,13 @@ public abstract class Planet {
             else
                 this.angularPosition += 360;
 
-
     }
 
+    /**
+     * Cada planeta setea su posicion al estado actual del sistema solar
+     *
+     * @param solarSystemStatus -
+     */
     public abstract void setSolarSystemStatusPosition(SolarSystemStatus solarSystemStatus);
 
 }

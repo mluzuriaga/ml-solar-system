@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import static java.time.temporal.ChronoUnit.DAYS;
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * Job que calcula inicialmente los 10 años solicitados. Luego queda en stand by hasta ser solicitado un nuevo periodo
+ */
 @Component
 public class WeatherForecastSchedule {
 
@@ -31,28 +34,35 @@ public class WeatherForecastSchedule {
     @Autowired
     private SolarSystemPeriod solarSystemPeriod;
 
-    //    (cron = "${solar.system.cronJob}")
-    @Scheduled(fixedRate = 1)
+    @Scheduled(cron = "${solar.system.cronJob}")
     public void executeDay() {
 
         if (this.solarSystemPeriod.isEnabled()) {
 
+            // Obtengo los dias ya calculados
             long daysPassed = DAYS.between(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate());
             if (daysPassed < this.solarSystemPeriod.getPeriodDays()) {
 
-                LOGGER.info("Ejecutando el Job de Pronostico del dia: " + this.solarSystemPeriod.getDate());
+                // Si aun quedan dias por pronosticar
+                LOGGER.info("* Ejecutando el Job de Pronostico del dia: " + this.solarSystemPeriod.getDate());
 
+                // Solicito correr un dia de pronostico de clima
                 WeatherForecast weatherForecastStrategy = this.solarSystem.runOneDayWeatherForecast();
+                // Persisto el pronostico del dia
                 this.weatherForecastRepository.save(weatherForecastStrategy);
-
-                LOGGER.info("------------------------------------------------------------");
 
             } else {
 
+                LOGGER.info("* Generando reporte del periodo: " + this.solarSystemPeriod.getInitialDate() + " - " + this.solarSystemPeriod.getDate());
+
+                // Genero el reporte del periodo
                 WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays());
+                // Persisto el reporte
                 this.weatherForecastReportRepository.save(weatherForecastReport);
 
+                // Limpio los contadores de periodos del intervalo
                 this.solarSystemPeriod.cleanCounters();
+                // Deshabilito la ejecucion del cron
                 this.solarSystemPeriod.setEnabled(false);
 
             }

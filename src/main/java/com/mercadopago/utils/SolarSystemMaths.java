@@ -22,6 +22,7 @@ public class SolarSystemMaths {
         // Tomo hasta 8 decimales para no introducir errores
         DecimalFormat df = new DecimalFormat("#.########");
 
+        // A partir del angulo en el que se encuentra el planeta obtengo las posiciones x e y
         double x = cos(toRadians(angle)) * radius;
         x = Double.parseDouble(df.format(x).replace(",", "."));
 
@@ -32,16 +33,27 @@ public class SolarSystemMaths {
 
     }
 
+    /**
+     * Calcula si la lista de puntos forman o no una linea
+     *
+     * @param pointList - lista de puntos
+     * @return -
+     */
     public static boolean isLine(List<Point2D> pointList) {
 
+        // Al menos necesito dos puntos para el calculo
         if (pointList.size() < 2)
             return false;
 
+        // Obtengo los primeros dos
         Point2D point0 = pointList.get(0);
         Point2D point1 = pointList.get(1);
 
+        // Calculo la pendiente entre ambos
         double gSlope = slope(point0, point1);
 
+        // Calculo entre un punto y su siguiente la pendiente, y voy comparando pendientes.
+        // Si alguna se encuentra distinta a la anterior entonces seguro no es una linea recta
         for (int i = 1; i < pointList.size(); i++) {
 
             Point2D pointI = pointList.get(i);
@@ -57,22 +69,32 @@ public class SolarSystemMaths {
 
     }
 
+    /**
+     * Calcula la pendiente entre dos puntos dados
+     *
+     * @param point1 -
+     * @param point2 -
+     * @return -
+     */
     private static double slope(Point2D point1, Point2D point2) {
 
+        // Validacion por infinito
         if ((point1.getX() - point2.getX()) == 0)
             return 0;
 
+        // Calculo de pendiente
         return (point2.getY() - point1.getY()) / (point2.getX() - point1.getX());
 
     }
 
-    public static boolean isInside(List<Point2D> polygon, Point2D point) {
-
-        return contains(polygon, point);
-
-    }
-
-    private static boolean contains(List<Point2D> points, Point2D test) {
+    /**
+     * Calcula si el punto dado se encuentra dentro del poligono formado por la lista de puntos
+     *
+     * @param points -
+     * @param point  -
+     * @return -
+     */
+    public static boolean isInside(List<Point2D> points, Point2D point) {
 
         int i;
         int j;
@@ -80,8 +102,8 @@ public class SolarSystemMaths {
 
         for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
 
-            if ((points.get(i).getY() > test.getY()) != (points.get(j).getY() > test.getY()) &&
-                    (test.getX() < (points.get(j).getX() - points.get(i).getX()) * (test.getY() - points.get(i).getY()) / (points.get(j).getY() - points.get(i).getY()) + points.get(i).getX())) {
+            if ((points.get(i).getY() > point.getY()) != (points.get(j).getY() > point.getY()) &&
+                    (point.getX() < (points.get(j).getX() - points.get(i).getX()) * (point.getY() - points.get(i).getY()) / (points.get(j).getY() - points.get(i).getY()) + points.get(i).getX())) {
                 result = !result;
             }
 

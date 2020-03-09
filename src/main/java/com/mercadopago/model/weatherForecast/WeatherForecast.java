@@ -5,6 +5,9 @@ import com.mercadopago.model.SolarSystemStatus;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Pronostico del clima por dia
+ */
 @Entity
 public class WeatherForecast {
 
@@ -12,11 +15,14 @@ public class WeatherForecast {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    // Fecha actual
     private LocalDate date;
 
+    // Tipo de periodo
     @Enumerated(EnumType.STRING)
     private WeatherForecastType weatherForecastType;
 
+    // Estado actual del sistema solar
     @OneToOne(cascade = CascadeType.ALL)
     private SolarSystemStatus solarSystemStatus;
 

@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Mantiene el estado del sistema solar al momento de solicitar un pronostico
+ */
 @Entity
 public class SolarSystemStatus {
 
@@ -12,13 +15,17 @@ public class SolarSystemStatus {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    // Posicion angular del planeta Betasoides
     private int betasoidesPosition;
+    // Posicion angular del planeta Ferengis
     private int ferengisPosition;
+    // Posicion angular del planeta Vulcanos
     private int vulcanosPosition;
 
+    // Perimetro del triangulo formado por los planetas
     private double perimeter;
 
-    public SolarSystemStatus() {
+    SolarSystemStatus() {
 
     }
 
@@ -58,7 +65,7 @@ public class SolarSystemStatus {
         return perimeter;
     }
 
-    public void setPerimeter(double perimeter) {
+    void setPerimeter(double perimeter) {
         this.perimeter = perimeter;
     }
 

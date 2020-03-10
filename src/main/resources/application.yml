@@ -1,6 +1,6 @@
 solar:
   system:
-    cronJob: 0 0/5 * * * *
+    cronJob: 0 0/1 * * * *
     daysPeriod: 3600
 
 server:
@@ -10,7 +10,7 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     generate-ddl: true
     properties:
       hibernate:

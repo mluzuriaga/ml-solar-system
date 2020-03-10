@@ -34,8 +34,7 @@ public class WeatherForecastSchedule {
     @Autowired
     private SolarSystemPeriod solarSystemPeriod;
 
-    //    (cron = "${solar.system.cronJob}")
-    @Scheduled(fixedRateString = "${solar.system.cronJob}")
+    @Scheduled(cron = "${solar.system.cronJob}")
     public void executeDay() {
 
         if (this.solarSystemPeriod.isEnabled()) {

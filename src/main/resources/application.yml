@@ -23,7 +23,7 @@ spring:
     hikari:
       connection-timeout: 30000
       idle-timeout: 600000
-      max-lifetime: 1800000
+      max-lifetime: 600000
     tomcat:
       test-on-borrow: true
       validation-query: SELECT 1

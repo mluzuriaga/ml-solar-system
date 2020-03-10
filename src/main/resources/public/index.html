@@ -2,9 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spring boot index page example</title>
+    <title>Sistema Solar - Mercado Pago</title>
 </head>
-<body>
-This is spring boot index page available inside resources/static/index.html
+<body style="background-color: aliceblue;">
+
+<div style="display: flex; flex-flow: column; height: 95vh;">
+
+    <div style="flex: 1; background-image: url('solar-system-image.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover">
+
+    </div>
+
+    <div style="flex: 4">
+
+        <h1>Sistema Solar - Mercado Pago</h1>
+        <p>El sistema de pronóstico para Betasoides, Vulcanos y Ferengis.</p>
+
+        <div style="display: flex; flex-flow: row;">
+
+            <div style="flex: 1">
+
+                <h3>Uso:</h3>
+                <div style="display: flex; flex-flow: column">
+
+                    <div style="flex: 1">
+                        <p>
+                            Método: GET <br>
+                            Ruta: http://ml-solar-system.herokuapp.com/solar-system/clima?dia=x <br>
+                            Descripción: Obtiene el pronóstico para el día 'x'. El número 'x' debe ser la cantidad de
+                            dias desde
+                            la fecha inicial del ultimo reporte generado.
+                        </p>
+                    </div>
+
+                    <div style="flex: 1">
+                        <p>
+                            Método: GET <br>
+                            Ruta: http://ml-solar-system.herokuapp.com/solar-system/reporte <br>
+                            Descripción: Obtiene el ultimo reporte generado.
+                        </p>
+                    </div>
+
+                    <div style="flex: 1">
+                        <p>
+                            Método: POST <br>
+                            Ruta: http://ml-solar-system.herokuapp.com/solar-system/nuevo?dias=x <br>
+                            Descripción: Genera un nuevo pronóstico a 'x' dias partir de la fecha final del último
+                            reporte
+                            generado.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="flex: 1;">
+
+                <div style="height: 500px; background-image: url('use-case-diagram.png'); background-size: contain; background-repeat: no-repeat"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>

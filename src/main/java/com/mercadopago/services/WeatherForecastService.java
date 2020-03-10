@@ -13,6 +13,6 @@ public interface WeatherForecastService {
     WeatherForecastReport getWeatherForecastReport();
 
     // Corre un nuevo intervalo de pronosticos
-    void runAnotherPeriod(long days);
+    boolean runAnotherPeriod(long days);
 
 }

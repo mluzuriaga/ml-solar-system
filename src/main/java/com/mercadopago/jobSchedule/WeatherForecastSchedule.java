@@ -54,7 +54,7 @@ public class WeatherForecastSchedule {
             } else {
 
                 // Genero el reporte del periodo
-                WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays());
+                WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays(), this.solarSystemPeriod.getIntenseRainyDates());
                 // Persisto el reporte
                 this.weatherForecastReportRepository.save(weatherForecastReport);
 
@@ -81,6 +81,7 @@ public class WeatherForecastSchedule {
         LOGGER.info("  - Cantidad de dias de lluvia: " + this.solarSystemPeriod.getRainyDays());
         LOGGER.info("  - Cantidad de dias de lluvia intensa: " + this.solarSystemPeriod.getIntenseRainyDays());
         LOGGER.info("  - Cantidad de dias de optimos de presion y temperatura : " + this.solarSystemPeriod.getOptimalDays());
+        this.solarSystemPeriod.getIntenseRainyDates().forEach(localDate -> LOGGER.info("  - Dia de lluvia intensa: " + localDate));
 
         LOGGER.info("------------------------------------------------------------------------------");
 

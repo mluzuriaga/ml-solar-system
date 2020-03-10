@@ -1,9 +1,11 @@
 package com.mercadopago.model.weatherForecast;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -30,6 +32,10 @@ public class WeatherForecastReport {
     private long rainyDays;
     // Cantidad de dias de lluvia instensa
     private long intenseRainyDays;
+    // Fechas de los dias de lluvia intensa
+    @ElementCollection
+    private Set<LocalDate> intenseRainyDates;
+
     // Cantidad de dias optimos de presion y temperatura
     private long optimalDays;
 
@@ -37,7 +43,7 @@ public class WeatherForecastReport {
 
     }
 
-    public WeatherForecastReport(LocalDate initDay, LocalDate lastDay, long droughtDays, long rainyDays, long intenseRainyDays, long optimalDays) {
+    public WeatherForecastReport(LocalDate initDay, LocalDate lastDay, long droughtDays, long rainyDays, long intenseRainyDays, long optimalDays, Set<LocalDate> intenseRainyDates) {
 
         this.initDay = initDay;
         this.lastDay = lastDay;
@@ -47,6 +53,8 @@ public class WeatherForecastReport {
         this.rainyDays = rainyDays;
         this.intenseRainyDays = intenseRainyDays;
         this.optimalDays = optimalDays;
+
+        this.intenseRainyDates = intenseRainyDates;
 
     }
 
@@ -112,6 +120,14 @@ public class WeatherForecastReport {
 
     public void setOptimalDays(long optimalDays) {
         this.optimalDays = optimalDays;
+    }
+
+    public Set<LocalDate> getIntenseRainyDates() {
+        return intenseRainyDates;
+    }
+
+    public void setIntenseRainyDates(Set<LocalDate> intenseRainyDates) {
+        this.intenseRainyDates = intenseRainyDates;
     }
 
 }

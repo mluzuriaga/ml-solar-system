@@ -3,6 +3,8 @@ package com.mercadopago.config;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Mantiene las fechas de inicio y fin para el calculo de los periodos, y la cuenta de los periodos en dicho intervalo
@@ -29,7 +31,12 @@ public class SolarSystemPeriod {
     // Cantidad de dias optimos de presion y temperatura
     private long optimalDays = 0;
 
+    // Fechas de los dias de lluvia intensa
+    private Set<LocalDate> intenseRainyDates;
+
     public SolarSystemPeriod() {
+
+        this.intenseRainyDates = new HashSet<>();
 
     }
 
@@ -95,6 +102,16 @@ public class SolarSystemPeriod {
 
     public void addOptimalDay() {
         this.optimalDays++;
+    }
+
+    public void addIntenseRainyDate(LocalDate date) {
+
+        this.intenseRainyDates.add(date);
+
+    }
+
+    public Set<LocalDate> getIntenseRainyDates() {
+        return this.intenseRainyDates;
     }
 
     /**

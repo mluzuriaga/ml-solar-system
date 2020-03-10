@@ -1,6 +1,6 @@
 solar:
   system:
-    cronJob: 0 */2 * * * *
+    cronJob: 0 0/15 * * * *
     daysPeriod: 3600
 
 server:
@@ -10,7 +10,7 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     generate-ddl: true
     properties:
       hibernate:
@@ -18,5 +18,5 @@ spring:
   datasource:
     username: b9aef16db746b0
     password: 872a8a60
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?reconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC

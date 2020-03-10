@@ -65,16 +65,22 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
      * Corre un nuevo intervalo de pronosticos
      *
      * @param days - cantidad de dias desde la ultima fecha que se quiere pronosticar
+     * @return -
      */
     @Override
-    public void runAnotherPeriod(long days) {
+    public boolean runAnotherPeriod(long days) {
 
-        // Seteo la fecha inicial
-        this.solarSystemPeriod.setInitialDate(this.solarSystemPeriod.getDate());
-        // Seteo la cantidad de dias que se va a pronosticar
-        this.solarSystemPeriod.setPeriodDays(days);
-        // Habilito el cron
-        this.solarSystemPeriod.setEnabled(true);
+        if (!this.solarSystemPeriod.isEnabled()) {
+            // Seteo la fecha inicial
+            this.solarSystemPeriod.setInitialDate(this.solarSystemPeriod.getDate());
+            // Seteo la cantidad de dias que se va a pronosticar
+            this.solarSystemPeriod.setPeriodDays(days);
+            // Habilito el cron
+            this.solarSystemPeriod.setEnabled(true);
+
+            return true;
+        } else
+            return false;
 
     }
 

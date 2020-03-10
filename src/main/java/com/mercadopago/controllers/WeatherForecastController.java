@@ -47,10 +47,13 @@ public class WeatherForecastController {
      * @return - cantidad de periodos
      */
     @GetMapping("/reporte")
-    public ResponseEntity<WeatherForecastReport> getWeatherForecastReport() {
+    public ResponseEntity getWeatherForecastReport() {
 
         WeatherForecastReport weatherForecastReport = this.weatherForecastService.getWeatherForecastReport();
-        return new ResponseEntity<>(weatherForecastReport, HttpStatus.OK);
+        if (weatherForecastReport != null)
+            return new ResponseEntity<>(weatherForecastReport, HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Aun no hay reportes generados.", HttpStatus.CONFLICT);
 
     }
 
@@ -60,9 +63,13 @@ public class WeatherForecastController {
      * @param days - cantidad de dias del periodo que se desea calcular. La fecha inicial sera la ultima del periodo anterior.
      */
     @PostMapping("/nuevo")
-    public void runAnotherPeriod(@RequestParam("dias") Long days) {
+    public ResponseEntity runAnotherPeriod(@RequestParam("dias") Long days) {
 
-        this.weatherForecastService.runAnotherPeriod(days);
+        boolean isRunning = this.weatherForecastService.runAnotherPeriod(days);
+        if (isRunning)
+            return new ResponseEntity<>("Corriendo pronostico.", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Ya existe un pronostico en progreso. Intente luego.", HttpStatus.CONFLICT);
 
     }
 

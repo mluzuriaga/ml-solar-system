@@ -62,6 +62,7 @@ public class RainyWeatherStrategy implements WeatherForecastStrategy {
         if (abs(perimeter - TriangleMath.MAXIMUM_PERIMETER) < 0.01) {
             // Si el perimetro calculado es igual al perimetro maximo (calculado), con un margen de error por los calculos hechos entonces es periodo de lluvia maximo
             this.solarSystemPeriod.addIntenseRainyDay();
+            this.solarSystemPeriod.addIntenseRainyDate(this.solarSystemPeriod.getDate());
             return new WeatherForecast(this.solarSystemPeriod.getDate(), WeatherForecastType.RAINY_INTENSE);
         } else {
             // Si el perimetro calculado es menor al perimetro maximo entonces es periodo de lluvia

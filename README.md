@@ -29,7 +29,7 @@ Hostear el modelo de datos y la API REST en un cloud computing libre y enviar la
 
 **Diagrama de clases:**
 
-![Image description](https://github.com/mluzuriaga/ml-solar-system/src/main/resources/public/use-case-diagram.png)
+![Screenshot](src/main/resources/public/use-case-diagram.png)
 
 **El desarrollo se hizo utilizando:**
 * Java 8

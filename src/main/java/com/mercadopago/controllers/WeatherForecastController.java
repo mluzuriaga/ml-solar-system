@@ -34,7 +34,6 @@ public class WeatherForecastController {
 
         } catch (WeatherForecastException e) {
 
-            e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }

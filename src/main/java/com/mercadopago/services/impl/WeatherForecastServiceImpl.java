@@ -41,10 +41,11 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
         // Si la fecha solicitada a un no se calculo se retorna una excepcion
         if (date.isAfter(this.solarSystemPeriod.getDate()))
             throw new WeatherForecastException("La fecha solicitada es posterior al periodo pronosticado. Para consultar sobre periodos anteriores contacte al administrador.");
-
-        // Se busca por fecha usando el repositorio
-        WeatherForecast weatherForecast = this.weatherForecastRepository.findAllByDate(date);
-        return new WeatherForecastDTO(days, weatherForecast.getWeatherForecastType());
+        else {
+            // Se busca por fecha usando el repositorio
+            WeatherForecast weatherForecast = this.weatherForecastRepository.findAllByDate(date);
+            return new WeatherForecastDTO(days, weatherForecast.getWeatherForecastType());
+        }
 
     }
 

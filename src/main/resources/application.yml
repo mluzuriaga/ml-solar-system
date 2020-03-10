@@ -21,5 +21,5 @@ spring:
     password: 872a8a60
     #    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://us-cdbr-iron-east-04:cleardb:net/heroku_3bad20f3b063f16?reconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?reconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC
 #    url: jdbc:mysql://localhost:3306/weather_forecast?reconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC

@@ -20,6 +20,10 @@ spring:
     password: 872a8a60
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?autoReconnect=true
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
     tomcat:
       test-on-borrow: true
       validation-query: SELECT 1

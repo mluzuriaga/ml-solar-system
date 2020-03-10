@@ -15,4 +15,7 @@ public interface WeatherForecastService {
     // Corre un nuevo intervalo de pronosticos
     boolean runAnotherPeriod(long days);
 
+    // Para el proceso
+    boolean stopJob();
+
 }

@@ -26,7 +26,8 @@
 
                     <div style="flex: 1">
                         <p style="color: crimson">
-                            Importante: El cloud free utilizado no permite mas de 3000 request por hora, por lo tanto el cron corre una vez cada 15 minutos.
+                            Importante: El cloud free utilizado tiene limite de request por hora a la BD, por lo tanto
+                            el cron corre una vez cada 15 minutos.
                         </p>
                     </div>
 
@@ -53,8 +54,21 @@
                             Método: POST <br>
                             Ruta: http://ml-solar-system.herokuapp.com/solar-system/nuevo?dias=x <br>
                             Descripción: Genera un nuevo pronóstico a 'x' dias partir de la fecha final del último
-                            reporte
-                            generado.
+                            reporte generado.
+                        </p>
+                    </div>
+
+                    <div style="flex: 1">
+                        <p>
+                            Método: POST <br>
+                            Ruta: http://ml-solar-system.herokuapp.com/solar-system/parar <br>
+                            Descripción: Stop del proceso que calcula el pronostico.
+                        </p>
+                    </div>
+
+                    <div style="flex: 1">
+                        <p>
+                            Github: https://github.com/mluzuriaga/ml-solar-system
                         </p>
                     </div>
 

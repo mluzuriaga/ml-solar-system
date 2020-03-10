@@ -56,12 +56,14 @@ La API REST expone 3 endpoints:
 * GET http://localhost:8080/solar-system/clima?dia=x : Obtiene el pronostico para el dia 'x'. El numero 'x' debe ser la cantidad de dias desde la fecha inicial del ultimo reporte generado.
 * GET http://localhost:8080/solar-system/reporte : Obtiene el ultimo reporte generado.
 * POST http://localhost:8080/solar-system/nuevo?dias=x : Genera un nuevo pronostico a 'x' dias partir de la fecha final del ultimo reporte generado.
+* POST http://localhost:8080/solar-system/parar : Stop del proceso que realiza los pronosticos.
 
 **Acceso al sistema de Heroku:**
 * Acceso a la portada: http://ml-solar-system.herokuapp.com/solar-system/
 * GET http://ml-solar-system.herokuapp.com/solar-system/clima?dia=x : Obtiene el pronostico para el dia 'x'. El numero 'x' debe ser la cantidad de dias desde la fecha inicial del ultimo reporte generado.
 * GET http://ml-solar-system.herokuapp.com/solar-system/reporte : Obtiene el ultimo reporte generado.
 * POST http://ml-solar-system.herokuapp.com/solar-system/nuevo?dias=x : Genera un nuevo pronostico a 'x' dias partir de la fecha final del ultimo reporte generado.
+* POST http://ml-solar-system.herokuapp.com/solar-system/parar : Stop del proceso que realiza los pronosticos.
 
 #Mejoras:
 

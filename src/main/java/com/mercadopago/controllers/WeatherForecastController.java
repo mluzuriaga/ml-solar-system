@@ -73,4 +73,18 @@ public class WeatherForecastController {
 
     }
 
+    /**
+     * Endpoint para parar el proceso
+     */
+    @PostMapping("/parar")
+    public ResponseEntity stopJob() {
+
+        boolean couldBeStopped = this.weatherForecastService.stopJob();
+        if (couldBeStopped)
+            return new ResponseEntity<>("Proceso parado con exito.", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("No hay procesos corriendo.", HttpStatus.CONFLICT);
+
+    }
+
 }

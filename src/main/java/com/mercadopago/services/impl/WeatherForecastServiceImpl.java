@@ -71,6 +71,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
     public boolean runAnotherPeriod(long days) {
 
         if (!this.solarSystemPeriod.isEnabled()) {
+
             // Seteo la fecha inicial
             this.solarSystemPeriod.setInitialDate(this.solarSystemPeriod.getDate());
             // Seteo la cantidad de dias que se va a pronosticar
@@ -79,6 +80,30 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
             this.solarSystemPeriod.setEnabled(true);
 
             return true;
+
+        } else
+            return false;
+
+    }
+
+    @Override
+    public boolean stopJob() {
+
+        if (this.solarSystemPeriod.isEnabled()) {
+
+            // Deshabilito el cron
+            this.solarSystemPeriod.setEnabled(false);
+
+            // Genero el reporte del periodo
+            WeatherForecastReport weatherForecastReport = new WeatherForecastReport(this.solarSystemPeriod.getInitialDate(), this.solarSystemPeriod.getDate(), this.solarSystemPeriod.getDroughtDays(), this.solarSystemPeriod.getRainyDays(), this.solarSystemPeriod.getIntenseRainyDays(), this.solarSystemPeriod.getOptimalDays(), this.solarSystemPeriod.getIntenseRainyDates());
+            // Persisto el reporte
+            this.weatherForecastReportRepository.save(weatherForecastReport);
+
+            // Limpio los contadores de periodos del intervalo
+            this.solarSystemPeriod.cleanCounters();
+
+            return true;
+
         } else
             return false;
 

@@ -10,7 +10,7 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     generate-ddl: true
     properties:
       hibernate:
@@ -19,4 +19,4 @@ spring:
     username: b9aef16db746b0
     password: 872a8a60
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16?autoReconnect=true

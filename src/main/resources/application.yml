@@ -1,6 +1,6 @@
 solar:
   system:
-    cronJob: 0 0/1 * * * *
+    cronJob: 0/1 * * * * *
     daysPeriod: 3600
 
 server:
@@ -12,18 +12,21 @@ spring:
     hibernate:
       ddl-auto: create-drop
     generate-ddl: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL57Dialect
+    #    properties:
+    #      hibernate:
+    #        dialect: org.hibernate.dialect.MySQL57Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
   datasource:
     username: b9aef16db746b0
     password: 872a8a60
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16
-    hikari:
-      connection-timeout: 600000
-      idle-timeout: 600000
-      max-lifetime: 120000
-    tomcat:
-      test-on-borrow: true
-      validation-query: SELECT 1
+    #    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: org.h2.Driver
+    #    url: jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_3bad20f3b063f16
+    url: jdbc:h2:mem:weather_forecast
+#    hikari:
+#      connection-timeout: 600000
+#      idle-timeout: 600000
+#      max-lifetime: 120000
+#    tomcat:
+#      test-on-borrow: true
+#      validation-query: SELECT 1

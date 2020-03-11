@@ -1,6 +1,6 @@
 solar:
   system:
-    cronJob: 0/1 * * * * *
+    cronJob: 1
     daysPeriod: 3600
 
 server:
